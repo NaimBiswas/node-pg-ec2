@@ -17,7 +17,8 @@ class DatabaseInitializer {
 
     /**
      * Main initialization method - checks if database exists and creates it if not
-     */   async initialize() {
+     */
+    async initialize() {
         const client = new Client(this.config);
 
         try {
