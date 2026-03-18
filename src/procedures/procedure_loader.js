@@ -18,17 +18,9 @@ class ProcedureLoader {
                 console.log(`📝 Loading: ${file}`);
 
                 const filePath = path.join(this.proceduresPath, file);
-                const sql = await fs.readFile(filePath, 'utf8');
+                let sql = await fs.readFile(filePath, 'utf8');
 
-                // Split multiple statements if present
-                const statements = sql.split(';').filter(s => s.trim());
-
-                for (const statement of statements) {
-                    if (statement.trim()) {
-                        await db.query(statement);
-                    }
-                }
-
+                await db.query(sql);
                 console.log(`✅ Loaded ${file}`);
             }
 

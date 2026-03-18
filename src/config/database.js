@@ -24,7 +24,7 @@ class Database {
             client.release();
         } catch (error) {
             console.error('❌ Database connection failed:', error.message);
-            process.exit(1);
+            // process.exit(1);
         }
     }
 
@@ -33,7 +33,7 @@ class Database {
         try {
             const res = await this.pool.query(text, params);
             const duration = Date.now() - start;
-            console.log('Executed query:', { text, duration, rows: res.rowCount });
+            console.log('Executed query:', { duration, rows: res.rowCount });
             return res;
         } catch (error) {
             console.error('Query error:', { text, error: error.message });

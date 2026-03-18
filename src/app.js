@@ -1,7 +1,7 @@
+const _createDb = require('./config/db-init');
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
-const db = require('./config/database');
 const MigrationRunner = require('./migrations/migration_runner');
 const ProcedureLoader = require('./procedures/procedure_loader');
 
@@ -56,7 +56,10 @@ app.use((req, res) => {
 const initializeDatabase = async () => {
     try {
         console.log('🚀 Starting database initialization...');
-
+        // Step 1: Ensure database exists
+        const dbInitializer = new _createDb();
+        await dbInitializer.initialize();
+        require('./config/database'); // Initialize database connection
         // Run migrations
         const migrationRunner = new MigrationRunner();
         await migrationRunner.runMigrations();

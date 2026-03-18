@@ -24,11 +24,7 @@ BEGIN
     VALUES (p_name, p_email, p_age)
     RETURNING id INTO v_user_id;
 
-    -- Log the action (you can expand this)
+    -- Log the action
     RAISE NOTICE 'User created with ID: %', v_user_id;
-    
-EXCEPTION
-    WHEN OTHERS THEN
-        RAISE;
 END;
 $$;
